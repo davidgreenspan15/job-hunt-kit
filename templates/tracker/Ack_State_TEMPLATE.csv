@@ -1,0 +1,2 @@
+date,company,disposition,note
+1970-01-01,__init__,handled,placeholder row so the file is never empty

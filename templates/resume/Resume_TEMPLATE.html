@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<!--
+  ============================================================
+  RESUME TEMPLATE (one page, US Letter, print-ready)
+  ============================================================
+  WHAT THIS FILE IS:
+    The blank master. scripts/setup.sh copies it to
+    Resumes/Template/Resume_TEMPLATE.html, and onboarding ("set me up")
+    fills that copy with your real content. The filled copy is your
+    master template; every tailored variant starts from it.
+
+  HOW TO MAKE A VARIANT (full steps in docs/RESUME_GUIDE.md):
+    1. Copy the filled master into Resumes/Drafts/ and name it
+       <First>_<Last>_Resume_<Company>_<RoleSlug>.html
+       e.g. Jordan_Rivera_Resume_TailspinToys_SeniorFullStack.html
+    2. PROJECTS: uncomment the 2 to 4 projects that fit the role and
+       comment out the rest.
+    3. BULLETS: trim from the BOTTOM of each role's list. Bullets are
+       ordered by priority, so the top ones survive longest.
+    4. SKILLS: reorder so the role's must-have tech comes first.
+    5. Render: scripts/pdf.sh <file>.html  (prints the page count)
+    6. RULE: exactly ONE page. If it overflows, trim bullets or drop
+       a project until it fits.
+
+  SECTION MARKERS:
+    [FIXED]      Same on every variant (header, education).
+    [CUSTOMIZE]  Changes per variant (bullets, projects, skills).
+
+  BULLET PRIORITY MARKERS (per bullet, in the comment above it):
+    [KEEP ALWAYS]  Never trimmed; your strongest signal.
+    [TRIM SECOND]  Cut only when [TRIM FIRST] bullets are already gone.
+    [TRIM FIRST]   First to go when the page is tight.
+
+  PLACEHOLDERS:
+    Header:     {{NAME}} {{LOCATION}} {{PHONE}} {{EMAIL}}
+                {{GITHUB_URL}} {{GITHUB_DISPLAY}} {{LINKEDIN_URL}}
+    Roles:      {{ROLEn_COMPANY}} {{ROLEn_LOCATION}} {{ROLEn_TITLE}}
+                {{ROLEn_STACK}} {{ROLEn_START}} {{ROLEn_END}}
+                {{ROLEn_BULLET_k}} {{ROLEn_BULLET_k_SUB_j}}
+    Skills:     {{SKILLS}}
+    Projects:   {{PROJECTn_NAME}} {{PROJECTn_URL}} {{PROJECTn_STACK}}
+                {{PROJECTn_DATES}} {{PROJECTn_BULLET_k}}
+    Education:  {{SCHOOL_1}} {{SCHOOL_1_LOCATION}} {{DEGREE_1}}
+                {{EDU_1_DATES}} {{INTERESTS}}
+    Dates use "Month YYYY" with an en dash between them
+    (e.g. "March 2022 – Present").
+
+  PROJECT LINK STATUS:
+    See Context/Project_Links.md. Link only live, presentable projects.
+    No public URL yet? Replace the <a> around the project name with
+    plain text. Never link localhost or a placeholder page.
+
+  STYLE:
+    No em dashes anywhere (they read as an AI tell). Use commas,
+    colons, or parentheses. En-dash date ranges are fine.
+  ============================================================
+-->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{NAME}} Resume</title>
+  <style>
+    @page { size: Letter; margin: 0.38in 0.7in 0.2in 0.7in; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: #fff; color: #000;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 10.5pt; line-height: 1.1;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .resume { width: 100%; max-width: 7.2in; margin: 0 auto; }
+
+    /* Header */
+    header { text-align: center; margin-bottom: 4px; }
+    .name { margin: 0; font-size: 15pt; font-weight: 700; }
+    .contact { margin: 2px 0 0; font-size: 10pt; }
+    .contact a { color: #1155CC; text-decoration: underline; }
+    a { color: #1155CC; text-decoration: underline; }
+
+    /* Sections */
+    .section { margin-top: 3px; }
+    .section-title {
+      font-weight: 700; text-transform: uppercase; font-size: 11pt;
+      border-bottom: 1.5px solid #000;
+      margin: 0 0 2px; padding-bottom: 1px;
+    }
+
+    /* Entries */
+    .entry { margin-top: 2px; }
+    .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+    .row p { margin: 0; }
+    .bold { font-weight: 700; }
+    .italic { font-style: italic; font-size: 10.5pt; }
+    .nowrap { white-space: nowrap; flex-shrink: 0; }
+
+    /* Bullets */
+    ul.main { margin: 1px 0 0; padding-left: 18px; list-style-type: disc; }
+    ul.main > li { margin: 0; line-height: 1.1; }
+    ul.sub { margin: 0; padding-left: 16px; list-style-type: none; }
+    ul.sub > li { margin: 0; line-height: 1.1; }
+    ul.sub > li::before { content: "o\00a0\00a0"; }
+
+    /* Projects */
+    .project-entry { margin-top: 3px; }
+    .project-tech { margin: 0; font-style: italic; font-size: 10.5pt; }
+
+    /* Education */
+    .edu-entry { margin-top: 2px; }
+    .interests { margin-top: 1px; }
+  </style>
+</head>
+<body>
+<main class="resume">
+
+  <!-- ===================== HEADER [FIXED] ===================== -->
+  <!-- {{GITHUB_DISPLAY}} is the visible text, e.g. github.com/your-handle. -->
+  <header>
+    <h1 class="name">{{NAME}}</h1>
+    <p class="contact">
+      {{LOCATION}} | {{PHONE}} |
+      <a href="mailto:{{EMAIL}}">{{EMAIL}}</a> |
+      GitHub: <a href="{{GITHUB_URL}}">{{GITHUB_DISPLAY}}</a> |
+      <a href="{{LINKEDIN_URL}}">LinkedIn</a>
+    </p>
+  </header>
+
+  <!-- ================ WORK EXPERIENCE [CUSTOMIZE] ================ -->
+  <!-- Most recent first. Trim bullets from the BOTTOM of each role.   -->
+  <!-- Add a role by copying a whole div.entry block; delete unused ones. -->
+  <!-- Two titles at one company (a promotion)? Give each title its own  -->
+  <!-- entry with the company name repeated, newest title first.        -->
+  <section class="section">
+    <h2 class="section-title">Work Experience</h2>
+
+    <!-- ROLE 1: current role. Present-tense verbs ("Lead", "Own", "Drive"). -->
+    <!-- Stack line rule: the italic "Title: stack" line must fit on ONE line. -->
+    <!-- If it wraps, drop the tech least relevant to the target job.       -->
+    <div class="entry">
+      <div class="row">
+        <p class="bold">{{ROLE1_COMPANY}}</p>
+        <p class="bold nowrap">{{ROLE1_LOCATION}}</p>
+      </div>
+      <div class="row">
+        <p class="italic">{{ROLE1_TITLE}}: {{ROLE1_STACK}}</p>
+        <p class="italic nowrap">{{ROLE1_START}} – {{ROLE1_END}}</p>
+      </div>
+      <ul class="main">
+        <!-- BULLET 1: scope and leadership (team size, what you own, how you ship) [KEEP ALWAYS] -->
+        <li>{{ROLE1_BULLET_1}}</li>
+        <!-- BULLET 2: your differentiator for the roles you target (keep near the top) [KEEP ALWAYS] -->
+        <li>{{ROLE1_BULLET_2}}</li>
+        <!-- BULLET 3: a system or architecture you designed [KEEP ALWAYS] -->
+        <li>{{ROLE1_BULLET_3}}</li>
+        <!-- BULLET 4: biggest business result, with supporting detail as sub-bullets [KEEP ALWAYS] -->
+        <li>{{ROLE1_BULLET_4}}
+          <ul class="sub">
+            <li>{{ROLE1_BULLET_4_SUB_1}}</li>
+            <li>{{ROLE1_BULLET_4_SUB_2}}</li>
+          </ul>
+        </li>
+        <!-- BULLET 5: second measurable win [TRIM SECOND] -->
+        <li>{{ROLE1_BULLET_5}}</li>
+        <!-- BULLET 6: quality, standards, or cross-functional collaboration [TRIM FIRST] -->
+        <li>{{ROLE1_BULLET_6}}</li>
+      </ul>
+    </div>
+
+    <!-- ROLE 2: previous role (or earlier title at the same company). Past-tense verbs. -->
+    <div class="entry">
+      <div class="row">
+        <p class="bold">{{ROLE2_COMPANY}}</p>
+        <p class="bold nowrap">{{ROLE2_LOCATION}}</p>
+      </div>
+      <div class="row">
+        <p class="italic">{{ROLE2_TITLE}}: {{ROLE2_STACK}}</p>
+        <p class="italic nowrap">{{ROLE2_START}} – {{ROLE2_END}}</p>
+      </div>
+      <ul class="main">
+        <!-- BULLET 1: the biggest thing you built here and its result [KEEP ALWAYS] -->
+        <li>{{ROLE2_BULLET_1}}
+          <ul class="sub">
+            <li>{{ROLE2_BULLET_1_SUB_1}}</li>
+            <li>{{ROLE2_BULLET_1_SUB_2}}</li>
+          </ul>
+        </li>
+        <!-- BULLET 2: a project you led end to end [TRIM FIRST] -->
+        <li>{{ROLE2_BULLET_2}}</li>
+      </ul>
+    </div>
+
+    <!-- ROLE 3: older role. Keep it short; trim to the condensed bullet if tight. -->
+    <div class="entry">
+      <div class="row">
+        <p class="bold">{{ROLE3_COMPANY}}</p>
+        <p class="bold nowrap">{{ROLE3_LOCATION}}</p>
+      </div>
+      <div class="row">
+        <p class="italic">{{ROLE3_TITLE}}: {{ROLE3_STACK}}</p>
+        <p class="italic nowrap">{{ROLE3_START}} – {{ROLE3_END}}</p>
+      </div>
+      <ul class="main">
+        <!-- Full version (2 bullets): use when space allows. BULLET 1 [KEEP ALWAYS], BULLET 2 [TRIM FIRST] -->
+        <li>{{ROLE3_BULLET_1}}</li>
+        <li>{{ROLE3_BULLET_2}}</li>
+        <!-- Condensed version (1 bullet): when tight, delete the 2 bullets above and uncomment this.
+        <li>{{ROLE3_BULLET_CONDENSED}}</li>
+        -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================ TECHNICAL SKILLS [CUSTOMIZE] ================ -->
+  <!-- One comma-separated line (two at most). Reorder per role: the     -->
+  <!-- posting's must-have tech first. List only tools you'd be happy    -->
+  <!-- to be quizzed on.                                                 -->
+  <section class="section">
+    <h2 class="section-title">Technical Skills</h2>
+    <p style="margin: 1px 0 0;">&#8226; {{SKILLS}}</p>
+  </section>
+
+  <!-- ================ PROJECTS [CUSTOMIZE] ================ -->
+  <!--
+    Keep 3 or 4 project blocks here; each variant uncomments 2 to 4.
+    Showing 2 projects: use 2 bullets each.
+    Showing 3 or 4 projects: use 1 bullet each (the condensed line).
+    Pick projects per job type using the table in docs/RESUME_GUIDE.md.
+    Keep commented-out blocks free of inner comments, or the page breaks.
+    Rename the section if you like, e.g.
+    "Other Technical Projects (Sole Creator & Developer)".
+  -->
+  <section class="section">
+    <h2 class="section-title">Technical Projects</h2>
+
+    <!-- PROJECT 1: live link on the name. 2 bullets when featured. -->
+    <div class="project-entry">
+      <div class="row">
+        <p class="bold"><a href="{{PROJECT1_URL}}">{{PROJECT1_NAME}}</a></p>
+        <p class="italic nowrap">{{PROJECT1_DATES}}</p>
+      </div>
+      <p class="project-tech">{{PROJECT1_STACK}}</p>
+      <ul class="main">
+        <li>{{PROJECT1_BULLET_1}}</li>
+        <li>{{PROJECT1_BULLET_2}}</li>
+        <!-- Condensed (1 bullet) for 3 or 4 projects: delete the 2 bullets above and uncomment this.
+        <li>{{PROJECT1_BULLET_CONDENSED}}</li>
+        -->
+      </ul>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-entry">
+      <div class="row">
+        <p class="bold"><a href="{{PROJECT2_URL}}">{{PROJECT2_NAME}}</a></p>
+        <p class="italic nowrap">{{PROJECT2_DATES}}</p>
+      </div>
+      <p class="project-tech">{{PROJECT2_STACK}}</p>
+      <ul class="main">
+        <li>{{PROJECT2_BULLET_1}}</li>
+      </ul>
+    </div>
+
+    <!-- PROJECT 3 (commented out by default; uncomment to feature) -->
+    <!--
+    <div class="project-entry">
+      <div class="row">
+        <p class="bold"><a href="{{PROJECT3_URL}}">{{PROJECT3_NAME}}</a></p>
+        <p class="italic nowrap">{{PROJECT3_DATES}}</p>
+      </div>
+      <p class="project-tech">{{PROJECT3_STACK}}</p>
+      <ul class="main">
+        <li>{{PROJECT3_BULLET_1}}</li>
+      </ul>
+    </div>
+    -->
+
+    <!-- PROJECT 4 (commented out by default; uncomment to feature) -->
+    <!--
+    <div class="project-entry">
+      <div class="row">
+        <p class="bold"><a href="{{PROJECT4_URL}}">{{PROJECT4_NAME}}</a></p>
+        <p class="italic nowrap">{{PROJECT4_DATES}}</p>
+      </div>
+      <p class="project-tech">{{PROJECT4_STACK}}</p>
+      <ul class="main">
+        <li>{{PROJECT4_BULLET_1}}</li>
+      </ul>
+    </div>
+    -->
+
+  </section>
+
+  <!-- ================ EDUCATION & INTERESTS [FIXED] ================ -->
+  <!-- Add a second edu-entry (bootcamp, certification) by copying the block. -->
+  <!-- Interests line is optional; delete it if you'd rather not.           -->
+  <section class="section">
+    <h2 class="section-title">Education &amp; Interests</h2>
+    <div class="edu-entry">
+      <div class="row">
+        <p class="bold">{{SCHOOL_1}}</p>
+        <p class="bold nowrap">{{SCHOOL_1_LOCATION}}</p>
+      </div>
+      <div class="row">
+        <p class="italic">{{DEGREE_1}}</p>
+        <p class="italic nowrap">{{EDU_1_DATES}}</p>
+      </div>
+    </div>
+    <p class="interests"><strong>Interests:</strong> {{INTERESTS}}</p>
+  </section>
+
+</main>
+</body>
+</html>

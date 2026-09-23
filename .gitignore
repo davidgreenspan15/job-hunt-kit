@@ -1,0 +1,47 @@
+# Two layers live in this repo:
+#   lowercase dirs (docs/, templates/, scripts/, examples/) = the kit, tracked
+#   Capitalized dirs at the root = your personal job hunt, never tracked
+#
+# Personal patterns are ROOT-ANCHORED (leading slash) on purpose, so
+# examples/Context/, examples/Resumes/, and examples/Applications/ stay tracked.
+
+# --- Personal working layout (created by scripts/setup.sh) ---
+/Context/
+/Resumes/
+/CoverLetters/
+/Applications/
+/Prep/
+/Research/
+
+# --- Secrets, anywhere in the tree ---
+# Matches only files named exactly Credentials.md. templates/Credentials.template.md
+# is tracked on purpose (headings and field names only, no values), and no
+# pattern below matches it.
+Credentials.md
+.env
+.env.*
+*.pem
+*.key
+*credentials*.json
+
+# --- Stray personal files dropped at the root ---
+# Browser screenshots land here by default, and so does a resume you hand in
+# during setup. Keep originals in Resumes/Archive/ instead.
+/*.png
+/*.jpg
+/*.jpeg
+/*.pdf
+/*.doc
+/*.docx
+
+# --- Rendered output next to the kit templates (templates are copied, never filled in place) ---
+/templates/**/*.pdf
+
+# --- Tool output ---
+.playwright-mcp/
+node_modules/
+.claude/settings.local.json
+
+# --- OS and editor junk ---
+.DS_Store
+~$*

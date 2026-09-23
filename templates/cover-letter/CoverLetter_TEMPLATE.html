@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<!--
+  ============================================================
+  COVER LETTER TEMPLATE (one page, US Letter, print-ready)
+  ============================================================
+  HOW TO USE:
+    1. Copy into Applications/<Company>/ as
+       <First>_<Last>_CoverLetter_<Company>_<RoleSlug>.html
+    2. Fill the header once (same as your resume header).
+    3. Write four short paragraphs using the guides below.
+       Aim for about 300 words (under 400).
+    4. Render: scripts/pdf.sh <file>.html
+    5. RULE: one page, and every claim must be true and backed by
+       your resume or Context/Achievement_Bank.md.
+
+  PLACEHOLDERS:
+    {{NAME}} {{LOCATION}} {{PHONE}} {{EMAIL}}
+    {{GITHUB_URL}} {{LINKEDIN_URL}} {{DATE}}
+    {{DATE}} format: "September 23, 2026".
+
+  ANGLES (details in docs/RESUME_GUIDE.md, Cover letters):
+    AI company: AI-forward (your hands-on AI work leads).
+    Everyone else: generalist (ownership, impact, craft).
+
+  STYLE:
+    No em dashes anywhere (they read as an AI tell). Use commas,
+    colons, or parentheses. Delete a link you don't have.
+  ============================================================
+-->
+<head>
+  <meta charset="utf-8" />
+  <title>{{NAME}} Cover Letter</title>
+  <style>
+    @page { size: Letter; margin: 0.75in 0.85in 0.75in 0.85in; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: #fff; color: #000;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 11pt; line-height: 1.35;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .page { width: 100%; max-width: 6.8in; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 18px; }
+    .name { margin: 0; font-size: 15pt; font-weight: 700; }
+    .contact { margin: 3px 0 0; font-size: 10pt; }
+    a { color: #1155CC; text-decoration: underline; }
+    .date { margin-bottom: 14px; }
+    .salutation { margin-bottom: 14px; }
+    p { margin: 0 0 12px; }
+    .closing { margin-top: 18px; }
+    .closing p { margin: 0; }
+    .sig-gap { height: 28px; }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- HEADER [FIXED]: same details as your resume header. -->
+  <header>
+    <h1 class="name">{{NAME}}</h1>
+    <p class="contact">
+      {{LOCATION}} | {{PHONE}} |
+      <a href="mailto:{{EMAIL}}">{{EMAIL}}</a> |
+      <a href="{{GITHUB_URL}}">GitHub</a> |
+      <a href="{{LINKEDIN_URL}}">LinkedIn</a>
+    </p>
+  </header>
+
+  <p class="date">{{DATE}}</p>
+
+  <!-- Use the hiring manager's name if the posting gives it; otherwise "Hiring Team". -->
+  <p class="salutation">Dear Hiring Team,</p>
+
+  <!-- BODY PARAGRAPHS: rewrite all four for every company. -->
+
+  <!-- PARAGRAPH 1, Opening: why THIS company and THIS role. Name one specific
+       thing only this company has (product, mission, recent launch, problem
+       space) and the role title. No "I am writing to apply". -->
+  <p>{{PARAGRAPH_1_WHY_THIS_COMPANY}}</p>
+
+  <!-- PARAGRAPH 2, Relevant proof: your most relevant experience mapped to what
+       the posting asks for. Two or three concrete results, with real numbers
+       where you have them. Don't restate the resume line by line. -->
+  <p>{{PARAGRAPH_2_RELEVANT_PROOF}}</p>
+
+  <!-- PARAGRAPH 3, Projects and extra proof: side projects or additional work
+       that show genuine fit or interest in their space. Public projects only. -->
+  <p>{{PARAGRAPH_3_PROJECTS}}</p>
+
+  <!-- PARAGRAPH 4, Close: short, confident, direct. One or two sentences
+       inviting a conversation. No begging, no "I hope". -->
+  <p>{{PARAGRAPH_4_CLOSE}}</p>
+
+  <div class="closing">
+    <p>Best,</p>
+    <div class="sig-gap"></div>
+    <p>{{NAME}}</p>
+  </div>
+</div>
+</body>
+</html>
